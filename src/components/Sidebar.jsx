@@ -192,7 +192,7 @@ export default function Sidebar({
       >
         {isMobile
           ? "🌍"
-          : "🌍 GeoShield AI"}
+          : "🌍 GeoShield"}
       </h1>
 
       <ul
