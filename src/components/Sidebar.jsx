@@ -146,14 +146,13 @@ export default function Sidebar({
   activePage,
   setActivePage,
 }) {
-  const isMobile = window.innerWidth < 768;
 
   const menuStyle = (page) => ({
     marginBottom: "18px",
 
     cursor: "pointer",
 
-    padding: "15px",
+    padding: "16px",
 
     borderRadius: "14px",
 
@@ -165,35 +164,14 @@ export default function Sidebar({
     transition: "0.3s",
 
     fontWeight: "bold",
+
+    color: "white",
+
+    fontSize: "20px",
   });
 
   return (
-    <div
-      style={{
-        width: isMobile ? "90px" : "270px",
-
-        background: "#020617",
-
-        color: "white",
-
-        minHeight: "100vh",
-
-        padding: "25px",
-
-        borderRight: "1px solid #1e293b",
-      }}
-    >
-      <h1
-        style={{
-          fontSize: "28px",
-
-          marginBottom: "40px",
-        }}
-      >
-        {isMobile
-          ? "🌍"
-          : "🌍 GeoShield"}
-      </h1>
+    <div>
 
       <ul
         style={{
@@ -202,13 +180,14 @@ export default function Sidebar({
           padding: 0,
         }}
       >
+
         <li
           style={menuStyle("dashboard")}
           onClick={() =>
             setActivePage("dashboard")
           }
         >
-          📊 {!isMobile && "Dashboard"}
+          📊 Dashboard
         </li>
 
         <li
@@ -217,7 +196,7 @@ export default function Sidebar({
             setActivePage("map")
           }
         >
-          🗺 {!isMobile && "Risk Map"}
+          🗺 Risk Map
         </li>
 
         <li
@@ -226,7 +205,7 @@ export default function Sidebar({
             setActivePage("alerts")
           }
         >
-          🚨 {!isMobile && "Alerts"}
+          🚨 Alerts
         </li>
 
         <li
@@ -235,8 +214,9 @@ export default function Sidebar({
             setActivePage("sensors")
           }
         >
-          ⚙ {!isMobile && "Sensors"}
+          ⚙ Sensors
         </li>
+
       </ul>
     </div>
   );

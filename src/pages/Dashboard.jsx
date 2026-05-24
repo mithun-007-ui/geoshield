@@ -117,7 +117,7 @@ export default function Dashboard() {
       >
         <div>
           <h1 style={{ fontSize: "38px" }}>
-            🚨 Landslide Dashboard
+          &nbsp;&nbsp;&nbsp;&nbsp;Landslide Dashboard
           </h1>
 
           <p
