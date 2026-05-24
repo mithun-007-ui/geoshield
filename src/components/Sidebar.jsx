@@ -63,79 +63,179 @@
 // }
 
 
+// export default function Sidebar({
+//   activePage,
+//   setActivePage,
+// }) {
+//   const menuStyle = (page) => ({
+//     marginBottom: "18px",
+//     cursor: "pointer",
+//     padding: "15px",
+//     borderRadius: "14px",
+//     background:
+//       activePage === page
+//         ? "linear-gradient(90deg,#2563eb,#1d4ed8)"
+//         : "transparent",
+
+//    transform:
+//   activePage === page
+//     ? "scale(1.03)"
+//     : "scale(1)",
+//     fontWeight: "bold",
+//   });
+
+//   return (
+//     <div
+//       style={{
+//         width: "270px",
+//         background: "#020617",
+//         color: "white",
+//         minHeight: "100vh",
+//         padding: "25px",
+//         borderRight: "1px solid #1e293b",
+//       }}
+//     >
+//       <h1
+//         style={{
+//           fontSize: "28px",
+//           marginBottom: "40px",
+//         }}
+//       >
+//         🌍 GeoShield AI
+//       </h1>
+
+//       <ul
+//         style={{
+//           listStyle: "none",
+//           padding: 0,
+//         }}
+//       >
+//         <li
+//           style={menuStyle("dashboard")}
+//           onClick={() => setActivePage("dashboard")}
+//         >
+//           📊 Dashboard
+//         </li>
+
+//         <li
+//           style={menuStyle("alerts")}
+//           onClick={() => setActivePage("alerts")}
+//         >
+//           🚨 Alerts
+//         </li>
+
+//         <li
+//           style={menuStyle("map")}
+//           onClick={() => setActivePage("map")}
+//         >
+//           🗺 Risk Map
+//         </li>
+
+//         <li
+//           style={menuStyle("sensors")}
+//           onClick={() => setActivePage("sensors")}
+//         >
+//           ⚙ Sensors
+//         </li>
+//       </ul>
+//     </div>
+//   );
+// }
+
 export default function Sidebar({
   activePage,
   setActivePage,
 }) {
+  const isMobile = window.innerWidth < 768;
+
   const menuStyle = (page) => ({
     marginBottom: "18px",
+
     cursor: "pointer",
+
     padding: "15px",
+
     borderRadius: "14px",
+
     background:
       activePage === page
         ? "linear-gradient(90deg,#2563eb,#1d4ed8)"
         : "transparent",
 
-   transform:
-  activePage === page
-    ? "scale(1.03)"
-    : "scale(1)",
+    transition: "0.3s",
+
     fontWeight: "bold",
   });
 
   return (
     <div
       style={{
-        width: "270px",
+        width: isMobile ? "90px" : "270px",
+
         background: "#020617",
+
         color: "white",
+
         minHeight: "100vh",
+
         padding: "25px",
+
         borderRight: "1px solid #1e293b",
       }}
     >
       <h1
         style={{
           fontSize: "28px",
+
           marginBottom: "40px",
         }}
       >
-        🌍 GeoShield AI
+        {isMobile
+          ? "🌍"
+          : "🌍 GeoShield AI"}
       </h1>
 
       <ul
         style={{
           listStyle: "none",
+
           padding: 0,
         }}
       >
         <li
           style={menuStyle("dashboard")}
-          onClick={() => setActivePage("dashboard")}
+          onClick={() =>
+            setActivePage("dashboard")
+          }
         >
-          📊 Dashboard
-        </li>
-
-        <li
-          style={menuStyle("alerts")}
-          onClick={() => setActivePage("alerts")}
-        >
-          🚨 Alerts
+          📊 {!isMobile && "Dashboard"}
         </li>
 
         <li
           style={menuStyle("map")}
-          onClick={() => setActivePage("map")}
+          onClick={() =>
+            setActivePage("map")
+          }
         >
-          🗺 Risk Map
+          🗺 {!isMobile && "Risk Map"}
+        </li>
+
+        <li
+          style={menuStyle("alerts")}
+          onClick={() =>
+            setActivePage("alerts")
+          }
+        >
+          🚨 {!isMobile && "Alerts"}
         </li>
 
         <li
           style={menuStyle("sensors")}
-          onClick={() => setActivePage("sensors")}
+          onClick={() =>
+            setActivePage("sensors")
+          }
         >
-          ⚙ Sensors
+          ⚙ {!isMobile && "Sensors"}
         </li>
       </ul>
     </div>

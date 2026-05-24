@@ -1,9 +1,3 @@
-// import Dashboard from "./pages/Dashboard";
-
-// export default function App() {
-//   return <Dashboard />;
-// }
-
 import { useState } from "react";
 
 import Sidebar from "./components/Sidebar";
@@ -28,6 +22,8 @@ export default function App() {
           <Dashboard />
         )}
 
+        {activePage === "map" && <MapPage />}
+
         {activePage === "alerts" && (
           <div
             style={{
@@ -38,15 +34,8 @@ export default function App() {
             }}
           >
             <h1>🚨 Alerts Page</h1>
-
-            <p>
-              High landslide alerts will appear
-              here.
-            </p>
           </div>
         )}
-
-        {activePage === "map" && <MapPage />}
 
         {activePage === "sensors" && (
           <div
@@ -58,11 +47,6 @@ export default function App() {
             }}
           >
             <h1>⚙ Sensors Page</h1>
-
-            <p>
-              Live sensor values will appear
-              here.
-            </p>
           </div>
         )}
       </div>
