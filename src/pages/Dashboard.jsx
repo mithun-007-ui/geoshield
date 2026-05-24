@@ -1,254 +1,295 @@
-// import { useState, useEffect } from "react";
-// import Sidebar from "../components/Sidebar";
-// import StatusCard from "../components/StatusCard";
-// import SensorChart from "../components/SensorChart";
-// export default function Dashboard() {
-//   const [data, setData] = useState({
-//     risk: "LOW",
-//     rainfall: "Light",
-//     moisture: "45%",
-//     road: "OPEN",
-//     alert: "No danger detected",
-//     siren: "OFF",
-//   });
 
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//       const randomMoisture = Math.floor(Math.random() * 100);
-
-//       let risk = "LOW";
-//       let rainfall = "Light";
-//       let road = "OPEN";
-//       let alert = "No danger detected";
-//       let siren = "OFF";
-
-//       if (randomMoisture > 60) {
-//         risk = "MEDIUM";
-//         rainfall = "Moderate";
-//         alert = "Soil moisture increasing";
-//       }
-
-//       if (randomMoisture > 80) {
-//         risk = "HIGH";
-//         rainfall = "Heavy";
-//         road = "CLOSED";
-//         siren = "ON";
-//         alert = "High landslide probability detected!";
-//       }
-
-//       setData({
-//         risk,
-//         rainfall,
-//         moisture: `${randomMoisture}%`,
-//         road,
-//         alert,
-//         siren,
-//       });
-//     }, 3000);
-
-//     return () => clearInterval(interval);
-//   }, []);
-
-//   return (
-//     <div
-//       style={{
-//         display: "flex",
-//         background: "#0f172a",
-//         minHeight: "100vh",
-//       }}
-//     >
-//       <Sidebar />
-
-//       <div
-//         style={{
-//           padding: "30px",
-//           flex: 1,
-//           color: "white",
-//         }}
-//       >
-//         <h1>🚨 Landslide Monitoring Dashboard</h1>
-
-//         <p
-//           style={{
-//             marginTop: "10px",
-//             color: "#94a3b8",
-//           }}
-//         >
-//           Real-time AI-based monitoring system
-//         </p>
-
-//         <div
-//           style={{
-//             display: "flex",
-//             gap: "20px",
-//             marginTop: "30px",
-//             flexWrap: "wrap",
-//           }}
-//         >
-//           <StatusCard title="Risk Level" value={data.risk} />
-
-//           <StatusCard title="Rainfall" value={data.rainfall} />
-
-//           <StatusCard title="Soil Moisture" value={data.moisture} />
-
-//           <StatusCard title="Road Status" value={data.road} />
-//         </div>
-
-//         <div
-//           style={{
-//             background: "#1e293b",
-//             marginTop: "40px",
-//             padding: "20px",
-//             borderRadius: "15px",
-//           }}
-//         >
-//           <h2>🚨 Emergency Alert</h2>
-
-//           <p
-//             style={{
-//               marginTop: "15px",
-//               fontSize: "18px",
-//             }}
-//           >
-//             {data.alert}
-//           </p>
-//             <SensorChart />
-//           <p
-//             style={{
-//               marginTop: "15px",
-//               color:
-//                 data.siren === "ON" ? "#ef4444" : "#22c55e",
-//               fontWeight: "bold",
-//             }}
-//           >
-//             🔊 Siren: {data.siren}
-//           </p>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
+import { useState } from "react";
+import '../index.css'
 import StatusCard from "../components/StatusCard";
 import SensorChart from "../components/SensorChart";
-import { useState, useEffect } from "react";
 
 export default function Dashboard() {
-  const [data, setData] = useState({
-    risk: "LOW",
-    rainfall: "Light",
-    moisture: "45%",
-    road: "OPEN",
-    alert: "No danger detected",
-    siren: "OFF",
-  });
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const randomMoisture = Math.floor(Math.random() * 100);
+  const hillStations = {
 
-      let risk = "LOW";
-      let rainfall = "Light";
-      let road = "OPEN";
-      let alert = "No danger detected";
-      let siren = "OFF";
+    Ooty: {
+      "Ketti Valley": {
+        risk: "HIGH",
+        rainfall: "Heavy",
+        moisture: "88%",
+        road: "CLOSED",
+        siren: "ON",
+      },
 
-      if (randomMoisture > 60) {
-        risk = "MEDIUM";
-        rainfall = "Moderate";
-        alert = "Soil moisture increasing";
-      }
+      Coonoor: {
+        risk: "MEDIUM",
+        rainfall: "Moderate",
+        moisture: "67%",
+        road: "OPEN",
+        siren: "OFF",
+      },
 
-      if (randomMoisture > 80) {
-        risk = "HIGH";
-        rainfall = "Heavy";
-        road = "CLOSED";
-        siren = "ON";
-        alert = "High landslide probability detected!";
-      }
+      Avalanche: {
+        risk: "LOW",
+        rainfall: "Light",
+        moisture: "42%",
+        road: "OPEN",
+        siren: "OFF",
+      },
+    },
 
-      setData({
-        risk,
-        rainfall,
-        moisture: `${randomMoisture}%`,
-        road,
-        alert,
-        siren,
-      });
-    }, 3000);
+    Kodaikanal: {
+      "Guna Cave Road": {
+        risk: "HIGH",
+        rainfall: "Heavy",
+        moisture: "91%",
+        road: "CLOSED",
+        siren: "ON",
+      },
 
-    return () => clearInterval(interval);
-  }, []);
+      "Pillar Rocks": {
+        risk: "MEDIUM",
+        rainfall: "Moderate",
+        moisture: "71%",
+        road: "OPEN",
+        siren: "OFF",
+      },
+
+      Berijam: {
+        risk: "LOW",
+        rainfall: "Light",
+        moisture: "38%",
+        road: "OPEN",
+        siren: "OFF",
+      },
+    },
+
+    Munnar: {
+      Devikulam: {
+        risk: "HIGH",
+        rainfall: "Heavy",
+        moisture: "85%",
+        road: "CLOSED",
+        siren: "ON",
+      },
+
+      Mattupetty: {
+        risk: "MEDIUM",
+        rainfall: "Moderate",
+        moisture: "69%",
+        road: "OPEN",
+        siren: "OFF",
+      },
+
+      "Top Station": {
+        risk: "LOW",
+        rainfall: "Light",
+        moisture: "40%",
+        road: "OPEN",
+        siren: "OFF",
+      },
+    },
+  };
+
+  const [selectedStation, setSelectedStation] =
+    useState("Ooty");
+
+  const [selectedArea, setSelectedArea] =
+    useState("Ketti Valley");
+
+  const currentData =
+    hillStations[selectedStation][selectedArea];
 
   return (
     <div
       style={{
-        padding: "30px",
-        flex: 1,
-        color: "white",
         background: "#0f172a",
         minHeight: "100vh",
+        padding: "35px",
+        color: "white",
       }}
     >
-      <h1>🚨 Landslide Monitoring Dashboard</h1>
 
-      <p
+      {/* Header */}
+      <div
         style={{
-          marginTop: "10px",
-          color: "#94a3b8",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
         }}
       >
-        Real-time AI-based monitoring system
-      </p>
+        <div>
+          <h1 style={{ fontSize: "38px" }}>
+            🚨 Landslide Dashboard
+          </h1>
 
+          <p
+            style={{
+              color: "#94a3b8",
+              marginTop: "10px",
+            }}
+          >
+            Smart AI-Based Disaster Monitoring Platform
+          </p>
+        </div>
+
+        <div
+          style={{
+            background: "#1e293b",
+            padding: "15px 20px",
+            borderRadius: "15px",
+            marginTop: "20px",
+          }}
+        >
+          🛰 System Status: ONLINE
+        </div>
+      </div>
+
+      {/* Dropdowns */}
       <div
         style={{
           display: "flex",
           gap: "20px",
-          marginTop: "30px",
+          marginTop: "40px",
           flexWrap: "wrap",
         }}
       >
-        <StatusCard title="Risk Level" value={data.risk} />
-        <StatusCard title="Rainfall" value={data.rainfall} />
-        <StatusCard title="Soil Moisture" value={data.moisture} />
-        <StatusCard title="Road Status" value={data.road} />
+
+        {/* Station */}
+        <select
+          value={selectedStation}
+          onChange={(e) => {
+
+            const station = e.target.value;
+
+            setSelectedStation(station);
+
+            setSelectedArea(
+              Object.keys(hillStations[station])[0]
+            );
+          }}
+
+          style={{
+            padding: "14px",
+            width: "260px",
+            borderRadius: "12px",
+            background: "#1e293b",
+            color: "white",
+            border: "none",
+          }}
+        >
+          {Object.keys(hillStations).map(
+            (station) => (
+              <option key={station}>
+                {station}
+              </option>
+            )
+          )}
+        </select>
+
+        {/* Area */}
+        <select
+          value={selectedArea}
+          onChange={(e) =>
+            setSelectedArea(e.target.value)
+          }
+
+          style={{
+            padding: "14px",
+            width: "260px",
+            borderRadius: "12px",
+            background: "#1e293b",
+            color: "white",
+            border: "none",
+          }}
+        >
+          {Object.keys(
+            hillStations[selectedStation]
+          ).map((area) => (
+            <option key={area}>
+              {area}
+            </option>
+          ))}
+        </select>
       </div>
 
+      {/* Cards */}
       <div
         style={{
-          background: "#1e293b",
+          display: "flex",
+          gap: "25px",
           marginTop: "40px",
-          padding: "20px",
-          borderRadius: "15px",
+          flexWrap: "wrap",
         }}
       >
-        <h2>🚨 Emergency Alert</h2>
+        <StatusCard
+          title="Risk Level"
+          value={currentData.risk}
+          color="#ef4444"
+        />
+
+        <StatusCard
+          title="Rainfall"
+          value={currentData.rainfall}
+          color="#38bdf8"
+        />
+
+        <StatusCard
+          title="Soil Moisture"
+          value={currentData.moisture}
+          color="#22c55e"
+        />
+
+        <StatusCard
+          title="Road Status"
+          value={currentData.road}
+          color="#facc15"
+        />
+      </div>
+
+      {/* Alert */}
+      <div
+        style={{
+          marginTop: "40px",
+          background:
+            "linear-gradient(145deg,#1e293b,#111827)",
+
+          padding: "30px",
+
+          borderRadius: "20px",
+
+          border: "1px solid #ef4444",
+        }}
+      >
+        <h2
+          style={{
+            color: "#ef4444",
+            fontSize: "28px",
+          }}
+        >
+          🚨 Emergency Warning
+        </h2>
 
         <p
           style={{
-            marginTop: "15px",
+            marginTop: "20px",
             fontSize: "18px",
           }}
         >
-          {data.alert}
+          High landslide probability detected near{" "}
+          <strong>{selectedArea}</strong>
         </p>
 
         <p
           style={{
             marginTop: "15px",
-            color:
-              data.siren === "ON"
-                ? "#ef4444"
-                : "#22c55e",
-            fontWeight: "bold",
+            color: "#94a3b8",
           }}
         >
-          🔊 Siren: {data.siren}
+          Siren Activated • Checkpost Alerted
         </p>
       </div>
 
       <SensorChart />
+
     </div>
   );
 }
+

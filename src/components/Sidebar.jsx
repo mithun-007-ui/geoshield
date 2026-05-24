@@ -1,33 +1,113 @@
-  export default function Sidebar({
+//   export default function Sidebar({
+//   activePage,
+//   setActivePage,
+// }) {
+//   const menuStyle = (page) => ({
+//     marginBottom: "20px",
+//     cursor: "pointer",
+//     padding: "12px",
+//     borderRadius: "10px",
+//     background:
+//       activePage === page ? "#1e293b" : "transparent",
+//   });
+
+//   return (
+//     <div
+//       style={{
+//         width: "250px",
+//         background: "#111827",
+//         color: "white",
+//         minHeight: "100vh",
+//         padding: "20px",
+//       }}
+//     >
+//       <h2>🌍 GeoShield AI</h2>
+
+//       <ul
+//         style={{
+//           listStyle: "none",
+//           padding: 0,
+//           marginTop: "30px",
+//         }}
+//       >
+//         <li
+//           style={menuStyle("dashboard")}
+//           onClick={() => setActivePage("dashboard")}
+//         >
+//           📊 Dashboard
+//         </li>
+
+//         <li
+//           style={menuStyle("alerts")}
+//           onClick={() => setActivePage("alerts")}
+//         >
+//           🚨 Alerts
+//         </li>
+
+//         <li
+//           style={menuStyle("map")}
+//           onClick={() => setActivePage("map")}
+//         >
+//           🗺 Map
+//         </li>
+
+//         <li
+//           style={menuStyle("sensors")}
+//           onClick={() => setActivePage("sensors")}
+//         >
+//           ⚙ Sensors
+//         </li>
+//       </ul>
+//     </div>
+//   );
+// }
+
+
+export default function Sidebar({
   activePage,
   setActivePage,
 }) {
   const menuStyle = (page) => ({
-    marginBottom: "20px",
+    marginBottom: "18px",
     cursor: "pointer",
-    padding: "12px",
-    borderRadius: "10px",
+    padding: "15px",
+    borderRadius: "14px",
     background:
-      activePage === page ? "#1e293b" : "transparent",
+      activePage === page
+        ? "linear-gradient(90deg,#2563eb,#1d4ed8)"
+        : "transparent",
+
+   transform:
+  activePage === page
+    ? "scale(1.03)"
+    : "scale(1)",
+    fontWeight: "bold",
   });
 
   return (
     <div
       style={{
-        width: "250px",
-        background: "#111827",
+        width: "270px",
+        background: "#020617",
         color: "white",
         minHeight: "100vh",
-        padding: "20px",
+        padding: "25px",
+        borderRight: "1px solid #1e293b",
       }}
     >
-      <h2>🌍 GeoShield AI</h2>
+      <h1
+        style={{
+          fontSize: "28px",
+          marginBottom: "40px",
+        }}
+      >
+        🌍 GeoShield AI
+      </h1>
 
       <ul
         style={{
           listStyle: "none",
           padding: 0,
-          marginTop: "30px",
         }}
       >
         <li
@@ -48,7 +128,7 @@
           style={menuStyle("map")}
           onClick={() => setActivePage("map")}
         >
-          🗺 Map
+          🗺 Risk Map
         </li>
 
         <li
