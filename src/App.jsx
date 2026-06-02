@@ -18,9 +18,18 @@ const placeholderPages = {
 
 export default function App() {
   const [activePage, setActivePage] = useState("dashboard");
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const isSmallScreen = () => window.matchMedia("(max-width: 1040px)").matches;
+  const [sidebarOpen, setSidebarOpen] = useState(() => !isSmallScreen());
 
   const PlaceholderIcon = placeholderPages[activePage]?.icon ?? ShieldCheck;
+
+  const navigateTo = (page) => {
+    setActivePage(page);
+
+    if (isSmallScreen()) {
+      setSidebarOpen(false);
+    }
+  };
 
   return (
     <div className="app-shell">
@@ -33,16 +42,18 @@ export default function App() {
         {sidebarOpen ? <X size={22} /> : <Menu size={22} />}
       </button>
 
+      {sidebarOpen && <button className="sidebar-backdrop" type="button" aria-label="Close navigation" onClick={() => setSidebarOpen(false)} />}
+
       <aside className={`app-sidebar ${sidebarOpen ? "is-open" : ""}`}>
-        <div className="brand">
+        <button className="brand" type="button" aria-label="Go to dashboard" onClick={() => navigateTo("dashboard")}>
           <img src="/download.png" alt="GeoShield AI" className="brand-mark" />
           <div>
             <p className="brand-kicker">GeoShield AI</p>
             <h1>Landslide Alert</h1>
           </div>
-        </div>
+        </button>
 
-        <Sidebar activePage={activePage} setActivePage={setActivePage} />
+        <Sidebar activePage={activePage} setActivePage={navigateTo} />
       </aside>
 
       <main className={`app-main ${sidebarOpen ? "with-sidebar" : ""}`}>
