@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Bell, Menu, RadioTower, ShieldCheck, X } from "lucide-react";
+import { Bell, Menu, ShieldCheck, X } from "lucide-react";
 import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/Dashboard";
 import MapPage from "./pages/MapPage";
+import SensorsPage from "./pages/SensorsPage";
 import "./App.css";
 
 const placeholderPages = {
@@ -12,13 +13,6 @@ const placeholderPages = {
     eyebrow: "Emergency operations",
     description:
       "Active sirens, road closures, and checkpost alerts will be listed here for fast response.",
-  },
-  sensors: {
-    icon: RadioTower,
-    title: "Sensor Network",
-    eyebrow: "Field telemetry",
-    description:
-      "Moisture probes, rainfall gauges, and slope sensors are grouped here for maintenance review.",
   },
 };
 
@@ -54,6 +48,7 @@ export default function App() {
       <main className={`app-main ${sidebarOpen ? "with-sidebar" : ""}`}>
         {activePage === "dashboard" && <Dashboard />}
         {activePage === "map" && <MapPage />}
+        {activePage === "sensors" && <SensorsPage />}
 
         {placeholderPages[activePage] && (
           <section className="page page-placeholder">
