@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Bell, Menu, ShieldCheck, X } from "lucide-react";
+import { Bell, Menu, Moon, ShieldCheck, Sun, X } from "lucide-react";
 import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/Dashboard";
 import MapPage from "./pages/MapPage";
@@ -20,8 +20,10 @@ export default function App() {
   const [activePage, setActivePage] = useState("dashboard");
   const isSmallScreen = () => window.matchMedia("(max-width: 1040px)").matches;
   const [sidebarOpen, setSidebarOpen] = useState(() => !isSmallScreen());
+  const [theme, setTheme] = useState("dark");
 
   const PlaceholderIcon = placeholderPages[activePage]?.icon ?? ShieldCheck;
+  const isDark = theme === "dark";
 
   const navigateTo = (page) => {
     setActivePage(page);
@@ -32,7 +34,7 @@ export default function App() {
   };
 
   return (
-    <div className="app-shell">
+    <div className="app-shell" data-theme={theme}>
       <button
         className="sidebar-toggle"
         type="button"
@@ -40,6 +42,16 @@ export default function App() {
         onClick={() => setSidebarOpen((isOpen) => !isOpen)}
       >
         {sidebarOpen ? <X size={22} /> : <Menu size={22} />}
+      </button>
+
+      <button
+        className="theme-toggle"
+        type="button"
+        aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+        onClick={() => setTheme((current) => (current === "dark" ? "light" : "dark"))}
+      >
+        {isDark ? <Sun size={20} /> : <Moon size={20} />}
+        <span>{isDark ? "Light" : "Dark"}</span>
       </button>
 
       {sidebarOpen && <button className="sidebar-backdrop" type="button" aria-label="Close navigation" onClick={() => setSidebarOpen(false)} />}
@@ -71,6 +83,10 @@ export default function App() {
             </div>
           </section>
         )}
+
+        <footer className="app-footer">
+  © 2026 GeoShield | AI-Powered Disaster Management System | Built for Safer Communities
+</footer>
       </main>
     </div>
   );
