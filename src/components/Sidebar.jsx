@@ -1,223 +1,26 @@
-//   export default function Sidebar({
-//   activePage,
-//   setActivePage,
-// }) {
-//   const menuStyle = (page) => ({
-//     marginBottom: "20px",
-//     cursor: "pointer",
-//     padding: "12px",
-//     borderRadius: "10px",
-//     background:
-//       activePage === page ? "#1e293b" : "transparent",
-//   });
+import { Activity, Bell, Map, RadioTower } from "lucide-react";
 
-//   return (
-//     <div
-//       style={{
-//         width: "250px",
-//         background: "#111827",
-//         color: "white",
-//         minHeight: "100vh",
-//         padding: "20px",
-//       }}
-//     >
-//       <h2>🌍 GeoShield AI</h2>
+const navItems = [
+  { id: "dashboard", label: "Dashboard", icon: Activity },
+  { id: "map", label: "Risk Map", icon: Map },
+  { id: "alerts", label: "Alerts", icon: Bell },
+  { id: "sensors", label: "Sensors", icon: RadioTower },
+];
 
-//       <ul
-//         style={{
-//           listStyle: "none",
-//           padding: 0,
-//           marginTop: "30px",
-//         }}
-//       >
-//         <li
-//           style={menuStyle("dashboard")}
-//           onClick={() => setActivePage("dashboard")}
-//         >
-//           📊 Dashboard
-//         </li>
-
-//         <li
-//           style={menuStyle("alerts")}
-//           onClick={() => setActivePage("alerts")}
-//         >
-//           🚨 Alerts
-//         </li>
-
-//         <li
-//           style={menuStyle("map")}
-//           onClick={() => setActivePage("map")}
-//         >
-//           🗺 Map
-//         </li>
-
-//         <li
-//           style={menuStyle("sensors")}
-//           onClick={() => setActivePage("sensors")}
-//         >
-//           ⚙ Sensors
-//         </li>
-//       </ul>
-//     </div>
-//   );
-// }
-
-
-// export default function Sidebar({
-//   activePage,
-//   setActivePage,
-// }) {
-//   const menuStyle = (page) => ({
-//     marginBottom: "18px",
-//     cursor: "pointer",
-//     padding: "15px",
-//     borderRadius: "14px",
-//     background:
-//       activePage === page
-//         ? "linear-gradient(90deg,#2563eb,#1d4ed8)"
-//         : "transparent",
-
-//    transform:
-//   activePage === page
-//     ? "scale(1.03)"
-//     : "scale(1)",
-//     fontWeight: "bold",
-//   });
-
-//   return (
-//     <div
-//       style={{
-//         width: "270px",
-//         background: "#020617",
-//         color: "white",
-//         minHeight: "100vh",
-//         padding: "25px",
-//         borderRight: "1px solid #1e293b",
-//       }}
-//     >
-//       <h1
-//         style={{
-//           fontSize: "28px",
-//           marginBottom: "40px",
-//         }}
-//       >
-//         🌍 GeoShield AI
-//       </h1>
-
-//       <ul
-//         style={{
-//           listStyle: "none",
-//           padding: 0,
-//         }}
-//       >
-//         <li
-//           style={menuStyle("dashboard")}
-//           onClick={() => setActivePage("dashboard")}
-//         >
-//           📊 Dashboard
-//         </li>
-
-//         <li
-//           style={menuStyle("alerts")}
-//           onClick={() => setActivePage("alerts")}
-//         >
-//           🚨 Alerts
-//         </li>
-
-//         <li
-//           style={menuStyle("map")}
-//           onClick={() => setActivePage("map")}
-//         >
-//           🗺 Risk Map
-//         </li>
-
-//         <li
-//           style={menuStyle("sensors")}
-//           onClick={() => setActivePage("sensors")}
-//         >
-//           ⚙ Sensors
-//         </li>
-//       </ul>
-//     </div>
-//   );
-// }
-
-export default function Sidebar({
-  activePage,
-  setActivePage,
-}) {
-
-  const menuStyle = (page) => ({
-    marginBottom: "18px",
-
-    cursor: "pointer",
-
-    padding: "16px",
-
-    borderRadius: "14px",
-
-    background:
-      activePage === page
-        ? "linear-gradient(90deg,#2563eb,#1d4ed8)"
-        : "transparent",
-
-    transition: "0.3s",
-
-    fontWeight: "bold",
-
-    color: "white",
-
-    fontSize: "20px",
-  });
-
+export default function Sidebar({ activePage, setActivePage }) {
   return (
-    <div>
-
-      <ul
-        style={{
-          listStyle: "none",
-
-          padding: 0,
-        }}
-      >
-
-        <li
-          style={menuStyle("dashboard")}
-          onClick={() =>
-            setActivePage("dashboard")
-          }
+    <nav className="sidebar-nav" aria-label="Primary navigation">
+      {navItems.map(({ id, label, icon: Icon }) => (
+        <button
+          className={`nav-item ${activePage === id ? "is-active" : ""}`}
+          type="button"
+          key={id}
+          onClick={() => setActivePage(id)}
         >
-          📊 Dashboard
-        </li>
-
-        <li
-          style={menuStyle("map")}
-          onClick={() =>
-            setActivePage("map")
-          }
-        >
-          🗺 Risk Map
-        </li>
-
-        <li
-          style={menuStyle("alerts")}
-          onClick={() =>
-            setActivePage("alerts")
-          }
-        >
-          🚨 Alerts
-        </li>
-
-        <li
-          style={menuStyle("sensors")}
-          onClick={() =>
-            setActivePage("sensors")
-          }
-        >
-          ⚙ Sensors
-        </li>
-
-      </ul>
-    </div>
+          <Icon size={20} />
+          <span>{label}</span>
+        </button>
+      ))}
+    </nav>
   );
 }

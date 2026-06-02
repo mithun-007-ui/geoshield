@@ -1,336 +1,71 @@
-// import { useState } from "react";
-
-// import Sidebar from "./components/Sidebar";
-
-// import Dashboard from "./pages/Dashboard";
-
-// import MapPage from "./pages/MapPage";
-
-// export default function App() {
-//   const [activePage, setActivePage] =
-//     useState("dashboard");
-
-//   return (
-//     <div style={{ display: "flex" }}>
-//       <Sidebar
-//         activePage={activePage}
-//         setActivePage={setActivePage}
-//       />
-
-//       <div style={{ flex: 1 }}>
-//         {activePage === "dashboard" && (
-//           <Dashboard />
-//         )}
-
-//         {activePage === "map" && <MapPage />}
-
-//         {activePage === "alerts" && (
-//           <div
-//             style={{
-//               background: "#0f172a",
-//               minHeight: "100vh",
-//               color: "white",
-//               padding: "30px",
-//             }}
-//           >
-//             <h1>🚨 Alerts Page</h1>
-//           </div>
-//         )}
-
-//         {activePage === "sensors" && (
-//           <div
-//             style={{
-//               background: "#0f172a",
-//               minHeight: "100vh",
-//               color: "white",
-//               padding: "30px",
-//             }}
-//           >
-//             <h1>⚙ Sensors Page</h1>
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
-// import { useState } from "react";
-
-// import Sidebar from "./components/Sidebar";
-
-// import Dashboard from "./pages/Dashboard";
-
-// import MapPage from "./pages/MapPage";
-
-// export default function App() {
-
-//   const [activePage, setActivePage] =
-//     useState("dashboard");
-
-//   const [sidebarOpen, setSidebarOpen] =
-//     useState(true);
-
-//   const isMobile = window.innerWidth < 768;
-
-//   return (
-//     <div
-//       style={{
-//         display: "flex",
-//         background: "#0f172a",
-//       }}
-//     >
-
-//       {/* Mobile Menu Button */}
-//       {isMobile && (
-//         <button
-//           onClick={() =>
-//             setSidebarOpen(!sidebarOpen)
-//           }
-
-//           style={{
-//             position: "fixed",
-
-//             top: "20px",
-
-//             left: "20px",
-
-//             zIndex: 1000,
-
-//             background: "#2563eb",
-
-//             color: "white",
-
-//             border: "none",
-
-//             padding: "12px 16px",
-
-//             borderRadius: "10px",
-
-//             cursor: "pointer",
-
-//             fontSize: "18px",
-//           }}
-//         >
-//           ☰
-//         </button>
-//       )}
-
-//       {/* Sidebar */}
-//       {sidebarOpen && (
-//         <Sidebar
-//           activePage={activePage}
-//           setActivePage={setActivePage}
-//         />
-//       )}
-
-//       {/* Main Content */}
-//       <div
-//         style={{
-//           flex: 1,
-
-//           marginLeft:
-//             isMobile || !sidebarOpen
-//               ? "0"
-//               : "0",
-
-//           transition: "0.3s",
-//         }}
-//       >
-//         {activePage === "dashboard" && (
-//           <Dashboard />
-//         )}
-
-//         {activePage === "map" && (
-//           <MapPage />
-//         )}
-
-//         {activePage === "alerts" && (
-//           <div
-//             style={{
-//               background: "#0f172a",
-
-//               minHeight: "100vh",
-
-//               color: "white",
-
-//               padding: "30px",
-//             }}
-//           >
-//             <h1>🚨 Alerts Page</h1>
-//           </div>
-//         )}
-
-//         {activePage === "sensors" && (
-//           <div
-//             style={{
-//               background: "#0f172a",
-
-//               minHeight: "100vh",
-
-//               color: "white",
-
-//               padding: "30px",
-//             }}
-//           >
-//             <h1>⚙ Sensors Page</h1>
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
 import { useState } from "react";
-
+import { Bell, Menu, RadioTower, ShieldCheck, X } from "lucide-react";
 import Sidebar from "./components/Sidebar";
-
 import Dashboard from "./pages/Dashboard";
-
 import MapPage from "./pages/MapPage";
+import "./App.css";
+
+const placeholderPages = {
+  alerts: {
+    icon: Bell,
+    title: "Alert Center",
+    eyebrow: "Emergency operations",
+    description:
+      "Active sirens, road closures, and checkpost alerts will be listed here for fast response.",
+  },
+  sensors: {
+    icon: RadioTower,
+    title: "Sensor Network",
+    eyebrow: "Field telemetry",
+    description:
+      "Moisture probes, rainfall gauges, and slope sensors are grouped here for maintenance review.",
+  },
+};
 
 export default function App() {
+  const [activePage, setActivePage] = useState("dashboard");
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
-  const [activePage, setActivePage] =
-    useState("dashboard");
-
-  const [sidebarOpen, setSidebarOpen] =
-    useState(true);
+  const PlaceholderIcon = placeholderPages[activePage]?.icon ?? ShieldCheck;
 
   return (
-    <div
-      style={{
-        background: "#0f172a",
-
-        minHeight: "100vh",
-      }}
-    >
-
-      {/* Menu Button */}
+    <div className="app-shell">
       <button
-        onClick={() =>
-          setSidebarOpen(!sidebarOpen)
-        }
-
-        style={{
-          position: "fixed",
-
-          top: "15px",
-
-          left: "15px",
-
-          zIndex: 3000,
-
-          background: "#2563eb",
-
-          color: "white",
-
-          border: "none",
-
-          padding: "12px 16px",
-
-          borderRadius: "12px",
-
-          fontSize: "20px",
-
-          cursor: "pointer",
-
-          boxShadow:
-            "0 8px 20px rgba(0,0,0,0.4)",
-        }}
+        className="sidebar-toggle"
+        type="button"
+        aria-label={sidebarOpen ? "Close navigation" : "Open navigation"}
+        onClick={() => setSidebarOpen((isOpen) => !isOpen)}
       >
-        ☰
+        {sidebarOpen ? <X size={22} /> : <Menu size={22} />}
       </button>
 
-      {/* Sidebar */}
-      <div
-        style={{
-          position: "fixed",
-
-          top: 0,
-
-          left: sidebarOpen ? "0" : "-240px",
-
-          width: "240px",
-
-          height: "100vh",
-
-          background: "#020617",
-
-          transition: "0.3s ease",
-
-          zIndex: 2000,
-
-          padding: "20px",
-
-          borderRight:
-            "1px solid #1e293b",
-        }}
-      >
-
-        {/* Logo */}
-        <h1
-          style={{
-            color: "white",
-
-            marginBottom: "40px",
-
-            marginTop: "80px",
-
-            fontSize: "42px",
-
-            lineHeight: "1.2",
-          }}
-        >
-          GeoShield
-        </h1>
-
-        <Sidebar
-          activePage={activePage}
-          setActivePage={setActivePage}
-        />
-      </div>
-
-      {/* Main Content */}
-      <div
-        style={{
-          marginLeft:
-            sidebarOpen ? "240px" : "0",
-
-          transition: "0.3s ease",
-        }}
-      >
-        {activePage === "dashboard" && (
-          <Dashboard />
-        )}
-
-        {activePage === "map" && (
-          <MapPage />
-        )}
-
-        {activePage === "alerts" && (
-          <div
-            style={{
-              color: "white",
-
-              padding: "100px 35px",
-            }}
-          >
-            <h1>🚨 Alerts Page</h1>
+      <aside className={`app-sidebar ${sidebarOpen ? "is-open" : ""}`}>
+        <div className="brand">
+          <img src="/download.png" alt="GeoShield AI" className="brand-mark" />
+          <div>
+            <p className="brand-kicker">GeoShield AI</p>
+            <h1>Landslide Alert</h1>
           </div>
-        )}
+        </div>
 
-        {activePage === "sensors" && (
-          <div
-            style={{
-              color: "white",
+        <Sidebar activePage={activePage} setActivePage={setActivePage} />
+      </aside>
 
-              padding: "100px 35px",
-            }}
-          >
-            <h1>⚙ Sensors Page</h1>
-          </div>
+      <main className={`app-main ${sidebarOpen ? "with-sidebar" : ""}`}>
+        {activePage === "dashboard" && <Dashboard />}
+        {activePage === "map" && <MapPage />}
+
+        {placeholderPages[activePage] && (
+          <section className="page page-placeholder">
+            <div className="placeholder-panel">
+              <PlaceholderIcon size={42} />
+              <p className="eyebrow">{placeholderPages[activePage].eyebrow}</p>
+              <h2>{placeholderPages[activePage].title}</h2>
+              <p>{placeholderPages[activePage].description}</p>
+            </div>
+          </section>
         )}
-      </div>
+      </main>
     </div>
   );
 }
